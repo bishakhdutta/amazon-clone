@@ -111,14 +111,15 @@ nav {
   border: none;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  color: rgb(92, 92, 92);
-  background-color: rgb(229, 229, 229);
+  color: #565656;
+  background-color: #f3f3f3;
   padding: 0 5px 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 12px;
   gap: 5px;
+  border-right: 1px solid #dbdbdb;
 }
 .search-btn {
   background-color: #febd69;
@@ -144,19 +145,33 @@ nav {
   width: 50px;
 }
 .account-cont {
-  height: 32px;
+  height: 50px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
-  padding: 0 6px 0 6px;
-  box-sizing: border-box;
+  width: 130px;
 }
-.cart-item{
+.returns{
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+}
+.cart-item {
   color: #ef8704;
   font-weight: bold;
-  margin-left: 12px;
+  margin-right: 23px;
   line-height: 8px;
 }
-.cart-icon{
+.cart-icon {
   color: white;
+}
+.cart {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 65px;
 }

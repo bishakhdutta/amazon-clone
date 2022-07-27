@@ -99,16 +99,16 @@ const Nav = () => {
             <ArrowDown size="14px" style={{marginBottom: '2px'}}/>
           </div>
         </div>
-        <div className="account-cont down-style">
+        <div className="account-cont down-style navElem">
           <div style={{height:'32px'}}>
           Hello, Sign In
           <div className="acount-sign-in loc">
             Account & Lists
           </div>
           </div>
-          <ArrowDown size="14px" style={{marginBottom: '1px'}}/>
+          <ArrowDown size="14px" style={{marginTop: '15px'}}/>
         </div>
-        <div className="account-cont down-style">
+        <div className="returns down-style navElem">
           <div style={{height:'32px'}}>
           Returns
           <div className="acount-sign-in loc">
@@ -116,7 +116,7 @@ const Nav = () => {
           </div>
           </div>
         </div>
-        <div>
+        <div className="cart navElem">
           <div className="cart-item">0</div>
           <div className="cart-icon">
           <Cart color="white" size="26px" style={{marginTop: '4px'}}/>
