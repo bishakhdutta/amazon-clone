@@ -58,7 +58,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 85px;
+  min-width: 85px;
 }
 .down-style {
   color: #ccc;
@@ -111,7 +111,7 @@ nav {
   border: none;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  color: #565656;
+  color: rgb(92, 92, 92);
   background-color: #f3f3f3;
   padding: 0 5px 0 5px;
   display: flex;
@@ -120,6 +120,9 @@ nav {
   font-size: 12px;
   gap: 5px;
   border-right: 1px solid #dbdbdb;
+}
+.select-type-label:hover{
+  color: black;
 }
 .search-btn {
   background-color: #febd69;

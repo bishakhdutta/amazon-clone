@@ -6,18 +6,9 @@ import {FiShoppingCart as Cart} from "react-icons/fi";
 import { useState } from "react";
 
 const Nav = () => {
-  const [textColor, setColor] = useState('rgb(92, 92, 92)');
   const [searchValue, setsearchValue] = useState('');
   const [selectVal, setselectVal] = useState('');
   const [border, setBorder] = useState(false);
-  const inputEventFocus = ()=>{
-    setColor('black');
-    setBorder(true);
-  }
-  const inputEventBlur = ()=>{
-    setColor('rgb(92, 92, 92)');
-    setBorder(false);
-  }
   const borderStyle = {
     display: 'flex',
     height: '40px',
@@ -45,12 +36,7 @@ const Nav = () => {
       <div className="nav-middle">
         <div className="search-cont">
           <div style={borderStyle}>
-          <div
-           className="select-type-label" 
-           style={{color: `${textColor}`}} 
-           onMouseOver={()=>setColor('black')} 
-           onMouseOut={()=>setColor('rgb(92, 92, 92)')}
-           >
+          <div className="select-type-label" >
             All<ArrowDown/>
           </div>
           <select className="search-type" hidden={true} value={selectVal} onChange={(e)=>setselectVal(e.target.value)}>
@@ -83,8 +69,8 @@ const Nav = () => {
           <input 
           type="text" value={searchValue}
           onChange={(e)=>setsearchValue(e.target.value)}
-          onFocus={inputEventFocus}
-          onBlur={inputEventBlur}
+          onFocus={()=>setBorder(true)}
+          onBlur={()=>setBorder(false)}
           />
         <div className="search-btn">
           <SearchIcon size="20px"/>
