@@ -1,6 +1,7 @@
 nav {
   height: 60px;
-  width: 100%;
+  min-width: 100%;
+  width: fit-content;
   background-color: #131921;
   display: flex;
   white-space: nowrap;
@@ -78,7 +79,7 @@ nav {
 }
 .nav-right {
   height: 100%;
-  width: 350px;
+  min-width: 350px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -95,7 +96,6 @@ nav {
 .search-cont input[type="text"] {
   width: 90%;
   height: 100%;
-  min-width: 365px;
   border: none;
   outline: none;
   padding: 0 8px 0 8px;
@@ -106,7 +106,7 @@ nav {
   border: 2px solid #ff9900;
 } */
 .select-type-label {
-  width: 45px;
+  min-width: 45px;
   height: 100%;
   border: none;
   border-top-left-radius: 4px;
@@ -127,7 +127,7 @@ nav {
 .search-btn {
   background-color: #febd69;
   height: 100%;
-  width: 45px;
+  min-width: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +152,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 130px;
+  min-width: 130px;
 }
 .returns{
   height: 50px;
