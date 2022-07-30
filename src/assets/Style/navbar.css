@@ -94,13 +94,14 @@ nav {
   box-sizing: border-box;
 }
 .search-cont input[type="text"] {
-  width: 90%;
+  width: 95%;
   height: 100%;
   border: none;
   outline: none;
   padding: 0 8px 0 8px;
   box-sizing: border-box;
   font-size: 16px;
+  min-width: 40vw;
 }
 /* .search-cont input[type=text]:focus > .search-cont div{
   border: 2px solid #ff9900;
@@ -177,4 +178,8 @@ nav {
   flex-direction: column;
   justify-content: center;
   width: 65px;
+}
+.searchResults:hover{
+  background-color: #eee;
+  cursor: pointer;
 }
