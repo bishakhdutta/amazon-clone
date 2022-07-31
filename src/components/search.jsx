@@ -20,6 +20,7 @@ const Search = ({ searchValue, width, display }) => {
     paddingLeft: "4px",
     paddingRight: "4px",
     whiteSpace: "pre",
+    fontSize: "18px",
   };
   const searchResult = [
     {
@@ -47,7 +48,7 @@ const Search = ({ searchValue, width, display }) => {
       path: "/samsung-m20",
     },
     {
-      name: "Samsung TV",
+      name: "samsung TV",
       path: "/samsung-m20",
     },
     {
@@ -66,18 +67,18 @@ const Search = ({ searchValue, width, display }) => {
       name: "Iphone XS Max",
       path: "/samsung-m20",
     },
-    
   ];
-  const filteredValue = searchResult.filter((elem)=>{
-    return elem.name.startsWith(searchValue);
-  })
+  const filteredValue = searchResult.filter((elem) => {
+    return elem.name.match(new RegExp(`^${searchValue}`, "i"));
+  });
   let automaticSearchCont = filteredValue.map((result) => {
     let searchVal = result.name.toString();
-    let newVal = searchVal.substring(searchValue.length, searchVal.length);
+    let upVal = searchVal.substring(0, searchValue.length);
+    let downVal = searchVal.substring(searchValue.length, searchVal.length);
     return (
       <div style={resultStyle} className="searchResults">
-        {searchValue}
-        <b>{newVal}</b>
+        {upVal}
+        <b>{downVal}</b>
       </div>
     );
   });

@@ -8,9 +8,10 @@ import Search from "./search";
 
 const Nav = () => {
   const [searchValue, setsearchValue] = useState("");
-  const [selectVal, setselectVal] = useState("");
+  const [selectVal, setselectVal] = useState("All");
   const [searchShow, setSearchShow] = useState("none");
   const [border, setBorder] = useState(false);
+  const [hoverStyle, setHoverStyle] = useState(false);
   const [width, setWidth] = useState(0);
   const borderStyle = {
     display: "flex",
@@ -21,6 +22,9 @@ const Nav = () => {
     borderStyle: "solid",
     borderRadius: "6px",
   };
+  const hovStyle = {
+    color: hoverStyle ? 'black' : 'rgb(92, 92, 92)',
+  }
   const ref = useRef(null);
   useLayoutEffect(() => {
     setWidth(ref.current.offsetWidth - 62);
@@ -30,6 +34,9 @@ const Nav = () => {
   }, []);
   const focusEvent = () => {
     setBorder(true);
+    if(searchValue.length>0){
+      setSearchShow("flex");
+    }
   };
   const blurEvent = () => {
     setBorder(false);
@@ -54,17 +61,19 @@ const Nav = () => {
       <div className="nav-middle">
         <div className="search-cont">
           <div style={borderStyle} ref={ref}>
-            <div className="select-type-label">
-              All
-              <ArrowDown />
+            <div className="select-type-label" style={hovStyle}>
+              {selectVal}
+              <ArrowDown width="16px"/>
             </div>
             <select
               className="search-type"
-              hidden={true}
               value={selectVal}
-              onChange={(e) => setselectVal(e.target.value)}
+              onChange={(e) => setselectVal(e.target.options[e.target.selectedIndex].text)}
+              id="sel"
+              onMouseOver={()=> setHoverStyle(true)}
+              onMouseOut={()=> setHoverStyle(false)}
             >
-              <option value="all">All</option>
+              <option value="all">All Departments</option>
               <option value="art-craft">Arts Crafts</option>
               <option value="automotive">Automotive</option>
               <option value="baby">Baby</option>
