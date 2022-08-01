@@ -1,7 +1,9 @@
-const Search = ({ searchValue, width, display }) => {
+import { useEffect } from "react";
+
+const Search = ({ searchValue, width, display, searchValUpdate,category }) => {
   const style = {
     width: `${width}px`,
-    marginLeft: "62px",
+    marginLeft: "54px",
     backgroundColor: "white",
     top: "50px",
     position: "absolute",
@@ -26,57 +28,73 @@ const Search = ({ searchValue, width, display }) => {
     {
       name: "Samsung M20",
       path: "/samsung-m20",
+      category: "electronics",
     },
     {
       name: "Samsung M10",
       path: "/samsung-m10",
+      category: "electronics",
     },
     {
       name: "Samsung M21",
       path: "/samsung-m20",
+      category: "electronics",
     },
     {
       name: "Samsung M30",
       path: "/samsung-m30",
+      category: "electronics",
     },
     {
       name: "Samsung M25",
       path: "/samsung-m25",
+      category: "electronics",
     },
     {
       name: "Samsung buds",
       path: "/samsung-m20",
+      category: "electronics",
     },
     {
       name: "samsung TV",
       path: "/samsung-m20",
+      category: "electronics",
     },
     {
       name: "Samsung M52",
       path: "/samsung-m20",
+      category: "electronics",
     },
     {
       name: "HP Victus",
       path: "/samsung-m20",
+      category: "computer",
     },
     {
       name: "Macbook",
       path: "/samsung-m20",
+      category: "computer",
     },
     {
       name: "Iphone XS Max",
       path: "/samsung-m20",
+      category: "electronics",
     },
   ];
+
   const filteredValue = searchResult.filter((elem) => {
-    return elem.name.match(new RegExp(`^${searchValue}`, "i"));
+    return elem.name.match(new RegExp(`^${searchValue}`, "i")) && (elem.category==category||category=='all');
   });
   let automaticSearchCont = filteredValue.map((result) => {
     let searchVal = result.name.toString();
     let upVal = searchVal.substring(0, searchValue.length);
     let downVal = searchVal.substring(searchValue.length, searchVal.length);
     return (
-      <div style={resultStyle} className="searchResults">
+      <div
+        style={resultStyle}
+        className="searchResults"
+        onMouseDown={() => searchValUpdate(searchVal)}
+      >
         {upVal}
         <b>{downVal}</b>
       </div>

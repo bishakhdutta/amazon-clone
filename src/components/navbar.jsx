@@ -4,11 +4,15 @@ import { AiFillCaretDown as ArrowDown } from "react-icons/ai";
 import { BsSearch as SearchIcon } from "react-icons/bs";
 import { FiShoppingCart as Cart } from "react-icons/fi";
 import { useState, useLayoutEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Search from "./search";
 
 const Nav = () => {
+  // const location = useLocation();
+  const navigate = useNavigate();
   const [searchValue, setsearchValue] = useState("");
-  const [selectVal, setselectVal] = useState("All");
+  const [selectVal, setselectVal] = useState("all");
+  const [selectValName, setselectValName] = useState("All");
   const [searchShow, setSearchShow] = useState("none");
   const [border, setBorder] = useState(false);
   const [hoverStyle, setHoverStyle] = useState(false);
@@ -23,18 +27,19 @@ const Nav = () => {
     borderRadius: "6px",
   };
   const hovStyle = {
-    color: hoverStyle ? 'black' : 'rgb(92, 92, 92)',
-  }
+    color: hoverStyle ? "black" : "rgb(92, 92, 92)",
+  };
   const ref = useRef(null);
+  const anotherRef = useRef(null);
   useLayoutEffect(() => {
-    setWidth(ref.current.offsetWidth - 62);
+    setWidth(ref.current.offsetWidth - 54);
     window.addEventListener("resize", () => {
-      setWidth(ref.current.offsetWidth - 62);
+      setWidth(ref.current.offsetWidth - 54);
     });
   }, []);
   const focusEvent = () => {
     setBorder(true);
-    if(searchValue.length>0){
+    if (searchValue.length > 0) {
       setSearchShow("flex");
     }
   };
@@ -42,10 +47,21 @@ const Nav = () => {
     setBorder(false);
     setSearchShow("none");
   };
+  const searchValUpdate = (value) => {
+    setsearchValue(value);
+    setSearchShow("none");
+    navigate(
+      `/search?category=${selectVal.replace(
+        /-/g,
+        "+"
+      )}&product=${value.replace(/\s/g, "+")}`,
+      { state: { searchValue: value } }
+    );
+  };
   return (
     <nav>
       <div className="nav-left">
-        <a href="/" className="brand-logo navElem"></a>
+        <a className="brand-logo navElem" onClick={() => navigate("/")}></a>
         <div className="deliver-cont">
           <div className="del-hov navElem">
             <div className="loc-icon">
@@ -61,17 +77,21 @@ const Nav = () => {
       <div className="nav-middle">
         <div className="search-cont">
           <div style={borderStyle} ref={ref}>
-            <div className="select-type-label" style={hovStyle}>
-              {selectVal}
-              <ArrowDown width="16px"/>
+            <div className="select-type-label" style={hovStyle} ref={anotherRef}>
+              {selectValName}
+              <ArrowDown width="16px" />
             </div>
             <select
               className="search-type"
               value={selectVal}
-              onChange={(e) => setselectVal(e.target.options[e.target.selectedIndex].text)}
+              onChange={(e) => {
+                setselectValName(e.target.options[e.target.selectedIndex].text);
+                setselectVal(e.target.value);
+
+              }}
               id="sel"
-              onMouseOver={()=> setHoverStyle(true)}
-              onMouseOut={()=> setHoverStyle(false)}
+              onMouseOver={() => setHoverStyle(true)}
+              onMouseOut={() => setHoverStyle(false)}
             >
               <option value="all">All Departments</option>
               <option value="art-craft">Arts Crafts</option>
@@ -102,7 +122,12 @@ const Nav = () => {
             <input
               type="text"
               value={searchValue}
-              onChange={(e) => {setsearchValue(e.target.value);(e.target.value.length > 0)?setSearchShow("flex"):setSearchShow("none")}}
+              onChange={(e) => {
+                setsearchValue(e.target.value);
+                e.target.value.length > 0
+                  ? setSearchShow("flex")
+                  : setSearchShow("none");
+              }}
               onFocus={focusEvent}
               onBlur={blurEvent}
             />
@@ -111,7 +136,13 @@ const Nav = () => {
             </div>
           </div>
         </div>
-        <Search searchValue={searchValue} width={width} display={searchShow} />
+        <Search
+          searchValue={searchValue}
+          width={width}
+          display={searchShow}
+          searchValUpdate={searchValUpdate}
+          category={selectVal}
+        />
       </div>
       <div className="nav-right">
         <div className="language-cont navElem">

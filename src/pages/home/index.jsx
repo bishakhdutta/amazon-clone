@@ -7,7 +7,8 @@ function Home() {
   const [productData, setProductData] = useState([]);
   const [item, setItem] = useState([]);
   const [showList, setShowList] = useState(true);
-  const api = "https://fakestoreapi.com/products/";
+  const api = "https://api.escuelajs.co/api/v1/products?offset=0&limit=200";
+  const singleapi = "https://api.escuelajs.co/api/v1/products/";
   const fetchData = async (url) => {
     try {
       const res = await fetch(url);
@@ -17,35 +18,36 @@ function Home() {
       return null;
     }
   };
-  useEffect(() => {
-    fetchData(api);
-  }, []);
+  // useEffect(() => {
+  //   fetchData(api);
+  // }, []);
   const fetchProduct = async (productId) => {
     try {
-      const res = await fetch(api + productId);
+      const res = await fetch(singleapi + productId);
       const data = await res.json();
       setItem(data);
-      setShowList(false);
+      console.log(item);
+      // setShowList(false);
     } catch (error) {
       return null;
     }
   };
-  let product = (() => {
-    return (
-      <Item
-        image={item.image}
-        title={item.title}
-        price={item.price}
-        setShowList={setShowList}
-      />
-    );
-  })();
+  // let product = Object.keys(item).map((details)=>{
+  //   return (
+  //     <Item
+  //       image={details.images[0]}
+  //       title={details.title}
+  //       price={details.price}
+  //       setShowList={setShowList}
+  //     />
+  //   );
+  // })
   let productList = productData.map((product) => {
     return (
       <Card
         key={product.id}
         id={product.id}
-        image={product.image}
+        image={product.images[0]}
         title={product.title}
         price={product.price}
         fetchProduct={fetchProduct}
@@ -54,7 +56,7 @@ function Home() {
   });
   return (
     <>
-      {/* <div className="list">{showList == true ? productList : product}</div> */}
+      {/* <div className="list">{productList}</div> */}
     </>
   );
 }
