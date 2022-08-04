@@ -17,6 +17,8 @@ const Nav = () => {
   const [border, setBorder] = useState(false);
   const [hoverStyle, setHoverStyle] = useState(false);
   const [width, setWidth] = useState(0);
+  const [marginWidth, setMarginWidth] = useState(48);
+  const selectRef = useRef(null);
   const borderStyle = {
     display: "flex",
     height: "40px",
@@ -30,11 +32,10 @@ const Nav = () => {
     color: hoverStyle ? "black" : "rgb(92, 92, 92)",
   };
   const ref = useRef(null);
-  const anotherRef = useRef(null);
   useLayoutEffect(() => {
-    setWidth(ref.current.offsetWidth - 54);
+    setWidth(ref.current.offsetWidth - selectRef.current.offsetWidth - 1);
     window.addEventListener("resize", () => {
-      setWidth(ref.current.offsetWidth - 54);
+      setWidth(ref.current.offsetWidth - selectRef.current.offsetWidth - 1);
     });
   }, []);
   const focusEvent = () => {
@@ -42,6 +43,8 @@ const Nav = () => {
     if (searchValue.length > 0) {
       setSearchShow("flex");
     }
+    setMarginWidth(selectRef.current.offsetWidth + 6);
+    setWidth(ref.current.offsetWidth - selectRef.current.offsetWidth - 6);
   };
   const blurEvent = () => {
     setBorder(false);
@@ -77,7 +80,7 @@ const Nav = () => {
       <div className="nav-middle">
         <div className="search-cont">
           <div style={borderStyle} ref={ref}>
-            <div className="select-type-label" style={hovStyle} ref={anotherRef}>
+            <div className="select-type-label" style={hovStyle} ref={selectRef}>
               {selectValName}
               <ArrowDown width="16px" />
             </div>
@@ -87,7 +90,6 @@ const Nav = () => {
               onChange={(e) => {
                 setselectValName(e.target.options[e.target.selectedIndex].text);
                 setselectVal(e.target.value);
-
               }}
               id="sel"
               onMouseOver={() => setHoverStyle(true)}
@@ -142,6 +144,7 @@ const Nav = () => {
           display={searchShow}
           searchValUpdate={searchValUpdate}
           category={selectVal}
+          margin={marginWidth}
         />
       </div>
       <div className="nav-right">

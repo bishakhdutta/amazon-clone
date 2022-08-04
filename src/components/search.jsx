@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-const Search = ({ searchValue, width, display, searchValUpdate,category }) => {
+const Search = ({ searchValue, width, display, searchValUpdate,category,margin }) => {
   const style = {
     width: `${width}px`,
-    marginLeft: "54px",
+    marginLeft: `${margin}px`,
     backgroundColor: "white",
     top: "50px",
     position: "absolute",
